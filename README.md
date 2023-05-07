@@ -1,50 +1,25 @@
-# UWP-App-Launcher
-*Background image by Sebastian Muller on Unsplash*
-![alt text](https://github.com/IsaacMorris1980/UWP-App-Launcher-Mobile/blob/oldversion/UWPAppLauncherMonochromeWideBranding.png)
- 
+## appLauncher (appLauncher14 codename... and 14 feels like netstandard 1.4 ;)))
 
+Android-like Home Screens RnD for Windows 10 "family" (UWP)
+Based on old-version of [appLauncher](https://github.com/IsaacMorris1980) by Isaac Morris
 
-The whole point of this project is to provide the best traditional home screen experience as possible for Windows 10 devices. Some people don't like Live Tiles so this is an alternative for them. Also, apps load faster when opened with this launcher.
+## My 2 cents
+- I fixed OutOfRange at place number 1 and 2 ;)
+- I downgraded min. os SDK from 16299 to 15063... and that's all! :) 
 
-Need help or have questions? Contact me at morris.isaac@gmail.com
+## Screenshot(s)
+![](images/shot1.png)
+![](images/shot2.png)
 
-![Launcher Demo](https://github.com/IsaacMorris1980/UWP-App-Launcher-Mobile/blob/Master/Navigation.gif)
+## Big Dev Questions (W10M)
+How to patch the W10M OS registry for appLauncher autoload feature?   
 
-![Launcher Search Demo](https://github.com/IsaacMorris1980/UWP-App-Launcher-Mobile/blob/Master/SearchingApps.gif)
+## References
+- [The original appLauncher](https://github.com/IsaacMorris1980/appLauncher)
+- [Isaac Morris aka IsaacMorris1980's Github](https://github.com/IsaacMorris1980)
 
-![Launcher Filter Demo](https://github.com/IsaacMorris1980/UWP-App-Launcher-Mobile/blob/Master/FilterApps.gif)
+## ..
+As-is. Research only.
 
-![Launcher Gif Support Demo](https://github.com/IsaacMorris1980/UWP-App-Launcher-Mobile/blob/oldversion/appLauncherGIFSupport.gif)
-
-
-
-Download the app here: https://github.com/IsaacMorris1980/UWP-App-Launcher-Mobile/releases
-
-## System Requirements
-Any Windows 10 device running the Build 16299 or higher.
-
-## Contributing and using code:
-We would really appreciate it if you contribute! Even if your are a first time contributer, there is something in the issues tab for you to handle. If you have your own ideas, you can make your own issues and even complete them yourself. 
-[Start contributing here today!](https://github.com/IsaacMorris1980/UWP-App-Launcher-Mobile/issues)
-
-More information about contributing to the project is here: [How to contribute to the project and guidelines on reusing code](https://github.com/IsaacMorris1980/UWP-App-Launcher-Mobile/blob/oldversion/CONTRIBUTING.md)
-
-Latest Features Merged to Testing Branch and builds will be made from Testing branch  before being merged to master
-## Here are a list of awesome features currently available:
-
-• Add/change background image in settings
-
-• GIF Backgrounds
-
-• Search
-
-• Animated Splash Screen
-
-
-## Features in development:
-• Parallax Wallpaper
-
-• Localization
-
-• Adding Accessibility
-
+## .
+-- me 2023

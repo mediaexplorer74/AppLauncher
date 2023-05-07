@@ -1,23 +1,4 @@
 ﻿// Methods for getting installed apps/games from the device are here. Note: Package = App/Game
-using appLauncher.Core.Model;
-
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-
-using Newtonsoft.Json;
-
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Core;
-using Windows.Foundation;
-using Windows.Management.Deployment;
-using Windows.Storage;
-using Windows.Storage.Streams;
 
 namespace appLauncher.Core.Helpers
 {
@@ -61,7 +42,7 @@ namespace appLauncher.Core.Helpers
                 try
                 {
 
-                    StorageFile item = (StorageFile)await ApplicationData.Current.LocalFolder.TryGetItemAsync("collection.txt");
+                    StorageFile item = (StorageFile)await ApplicationData.Current.LocalFolder.TryGetItemAsync("collection.json");
                     string apps = await Windows.Storage.FileIO.ReadTextAsync(item);
                     listAppss = JsonConvert.DeserializeObject<List<Apps>>(apps);
                     xmlApporFolderHelper.DeserializeApporFolders();
@@ -91,10 +72,10 @@ namespace appLauncher.Core.Helpers
                     //}
 
                 }
-                catch (Exception e)
+                catch (Exception es)
                 {
-                    Analytics.TrackEvent("Crashed during loading apps list to last");
-                    Crashes.TrackError(e);
+                    await CrashAnalyticsHelper.LoggingCrash(es);
+                    await CrashAnalyticsHelper.LoggingAnalytics("Crashed during loading apps list");
                 }
             }
             else
@@ -118,7 +99,8 @@ namespace appLauncher.Core.Helpers
                                 }
                                 catch (Exception es)
                                 {
-                                    Crashes.TrackError(es);
+                                    await CrashAnalyticsHelper.LoggingCrash(es);
+                                    await CrashAnalyticsHelper.LoggingAnalytics("App logo unable to be found");
                                     Apps.Name = item.DisplayName;
                                     Apps.FullName = item.Id.FullName;
                                     Apps.Description = item.Description;
@@ -149,8 +131,8 @@ namespace appLauncher.Core.Helpers
                             }
                             catch (Exception es)
                             {
-                                Analytics.TrackEvent("App logo unable to be found");
-                                Crashes.TrackError(es);
+                                await CrashAnalyticsHelper.LoggingCrash(es);
+                                await CrashAnalyticsHelper.LoggingAnalytics("App logo unable to be found");
                                 Apps.Name = item.DisplayName;
                                 Apps.FullName = item.Id.FullName;
                                 Apps.Description = item.Description;
@@ -167,7 +149,8 @@ namespace appLauncher.Core.Helpers
                     catch (Exception es)
                     {
 
-                        Crashes.TrackError(es);
+                        await CrashAnalyticsHelper.LoggingCrash(es);
+                        await CrashAnalyticsHelper.LoggingAnalytics("Crashed during loading all apps");
                     }
                 }
                 //int loc = 0;
@@ -213,13 +196,14 @@ namespace appLauncher.Core.Helpers
             }
             catch (Exception es)
             {
-                Analytics.TrackEvent("Crashed during saving app list positions");
-                Crashes.TrackError(es);
+                await CrashAnalyticsHelper.LoggingCrash(es);
+                await CrashAnalyticsHelper.LoggingAnalytics("Crashed during saving apps list to file");
             }
         }
 
         public static async Task<bool> LaunchApp(string fullname)
         {
+
             PackageManager pm = new PackageManager();
             Package pack = pm.FindPackageForUser("", fullname);
             IReadOnlyList<AppListEntry> listentry = await pack.GetAppListEntriesAsync();

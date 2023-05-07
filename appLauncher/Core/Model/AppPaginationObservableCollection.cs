@@ -57,13 +57,15 @@ namespace appLauncher.Core.Model
         }
         public void GetFilteredApps(string selected)
         {
-
+            int loc = 0;
             List<Apps> orderlist;
             switch (selected)
             {
                 case "AppAZ":
                     orderlist = originalCollection.OrderBy(y => y.Name).ToList();
                     originalCollection = new ObservableCollection<Apps>(orderlist);
+
+
                     break;
                 case "AppZA":
                     orderlist = originalCollection.OrderByDescending(y => y.Name).ToList();
@@ -90,6 +92,11 @@ namespace appLauncher.Core.Model
                     return;
 
 
+            }
+            foreach (Apps item in originalCollection)
+            {
+                item.ListPosition = loc;
+                loc += 1;
             }
             RecalculateThePageItems();
             this.OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
@@ -170,6 +177,15 @@ namespace appLauncher.Core.Model
             }
 
             return itemsToRemove.Count;
+        }
+        public static int Remove<T>(this List<T> coll, Func<T, bool> condition)
+        {
+            var itemstoRemove = coll.Where(condition).ToList();
+            foreach (var itemtoremove in itemstoRemove)
+            {
+                coll.Remove(itemtoremove);
+            }
+            return itemstoRemove.Count;
         }
     }
 }

@@ -26,11 +26,12 @@ namespace appLauncher.Core.Helpers
 
         public static ReadOnlyObservableCollection<Apps> searchApps { get; private set; }
         public static AppPaginationObservableCollection Apps { get; set; }
+        public static ApporFolderPaginationObservableCollection Appors { get; set; }
         public static List<Apps> appsList { get; set; } = new List<Apps>();
 
         public static event EventHandler AppsRetreived;
         public static PageChangingVariables pageVariables { get; set; } = new PageChangingVariables();
-
+        public static List<ApporFolderBase> apporFolders { get; set; } = new List<ApporFolderBase>();
         public static async Task<bool> IsFilePresent(string fileName, string folderpath = "")
 
         {
@@ -53,7 +54,9 @@ namespace appLauncher.Core.Helpers
         public static async Task LoadCollectionAsync()
         {
             List<Apps> listAppss = new List<Apps>();
-            if (await packageHelper.IsFilePresent("collection.txt"))
+            List<AppTile> appTiles = new List<AppTile>();
+            List<ApporFolderBase> testtiles = new List<ApporFolderBase>();
+            if (await packageHelper.IsFilePresent("collection.json"))
             {
                 try
                 {
@@ -61,6 +64,32 @@ namespace appLauncher.Core.Helpers
                     StorageFile item = (StorageFile)await ApplicationData.Current.LocalFolder.TryGetItemAsync("collection.txt");
                     string apps = await Windows.Storage.FileIO.ReadTextAsync(item);
                     listAppss = JsonConvert.DeserializeObject<List<Apps>>(apps);
+                    xmlApporFolderHelper.DeserializeApporFolders();
+                    //StorageFile testitem = (StorageFile)await ApplicationData.Current.LocalFolder.TryGetItemAsync("test.json");
+                    //string testapps = await FileIO.ReadTextAsync(testitem);
+                    //testtiles = JsonConvert.DeserializeObject<List<ApporFolderBase>>(testapps);
+                    //ApporFolderBase a = testtiles.FirstOrDefault();
+                    //int loc = 0;
+                    //foreach (Apps items in listAppss)
+                    //{
+                    //    AppTile app = new AppTile()
+                    //    {
+                    //        AppName = items.Name,
+                    //        AppDeveloper = items.Developer,
+                    //        AppDescription = items.Description,
+                    //        AppLogo = items.Logo,
+                    //        AppTip = items.Tip,
+                    //        AppBackgroundColor = items.BackColor,
+                    //        AppForgroundColor = items.LogoColor,
+                    //        AppTextColor = items.TextColor,
+                    //        InstalledDate = items.InstalledDate,
+                    //        AppFullName = items.FullName,
+                    //        ListPosition = loc
+                    //    };
+                    //    apporFolders.Add(app);
+                    //    loc += 1;
+                    //}
+
                 }
                 catch (Exception e)
                 {
@@ -141,6 +170,27 @@ namespace appLauncher.Core.Helpers
                         Crashes.TrackError(es);
                     }
                 }
+                //int loc = 0;
+                //foreach (Apps item in listAppss)
+                //{
+
+                //    AppTile app = new AppTile()
+                //    {
+                //        AppName = item.Name,
+                //        AppDeveloper = item.Developer,
+                //        AppDescription = item.Description,
+                //        AppLogo = item.Logo,
+                //        AppTip = item.Tip,
+                //        AppBackgroundColor = item.BackColor,
+                //        AppForgroundColor = item.LogoColor,
+                //        AppTextColor = item.TextColor,
+                //        InstalledDate = item.InstalledDate,
+                //        AppFullName = item.FullName,
+                //        ListPosition = loc
+                //    };
+                //    apporFolders.Add(app);
+                //    loc += 1;
+                //}
             }
 
 
@@ -154,8 +204,12 @@ namespace appLauncher.Core.Helpers
             {
                 List<Apps> savapps = packageHelper.Apps.GetOriginalCollection().ToList();
                 var te = JsonConvert.SerializeObject(savapps, Formatting.Indented); ;
-                StorageFile item = (StorageFile)await ApplicationData.Current.LocalFolder.CreateFileAsync("collection.txt", CreationCollisionOption.ReplaceExisting);
+                StorageFile item = (StorageFile)await ApplicationData.Current.LocalFolder.CreateFileAsync("collection.json", CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteTextAsync(item, te);
+                //var anotherdoc = JsonConvert.SerializeObject(apporFolders, Formatting.Indented);
+                //StorageFile anotheritem = (StorageFile)await ApplicationData.Current.LocalFolder.CreateFileAsync("test.json", CreationCollisionOption.ReplaceExisting);
+                //await FileIO.WriteTextAsync(anotheritem, anotherdoc);
+                xmlApporFolderHelper.SerializeApporFolders();
             }
             catch (Exception es)
             {

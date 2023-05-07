@@ -85,7 +85,7 @@ namespace appLauncher.Core.Helpers
                     string apps = await Windows.Storage.FileIO.ReadTextAsync(item);
                     List<PageBackgrounds> images = JsonConvert.DeserializeObject<List<PageBackgrounds>>(apps);
                     backgroundImage = new ObservableCollection<PageBackgrounds>(images);
-                    ThreadPoolTimer imageTimer = ThreadPoolTimer.CreatePeriodicTimer(RecalculateThePageItems, SettingsHelper.totalAppSettings.ImageRotationTime);
+                    // ThreadPoolTimer imageTimer = ThreadPoolTimer.CreatePeriodicTimer(RecalculateThePageItems, SettingsHelper.totalAppSettings.ImageRotationTime);
                 }
                 catch (Exception e)
                 {

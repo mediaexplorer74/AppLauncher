@@ -27,6 +27,8 @@ namespace appLauncher.Core.Model
         private string appversion;
 
 
+
+
         public GlobalAppSettings()
         {
             GlobalVariables.NumofApps += SetPageSize;

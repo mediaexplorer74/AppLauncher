@@ -115,8 +115,13 @@
     <Compile Include="Core\Helpers\imageHelper.cs" />
     <Compile Include="Core\Helpers\packageHelper.cs" />
     <Compile Include="Core\Helpers\settingsHelper.cs" />
+    <Compile Include="Core\Helpers\xmlHelper.cs" />
+    <Compile Include="Core\Model\AppFolder.cs" />
     <Compile Include="Core\Model\ApporFolderBase.cs" />
+    <Compile Include="Core\Model\ApporFolderPaginationObservableCollection.cs" />
     <Compile Include="Core\Model\Apps.cs" />
+    <Compile Include="Core\Model\AppTile.cs" />
+    <Compile Include="Core\Model\AppFolderList.cs" />
     <Compile Include="Core\Model\DisplayImages.cs" />
     <Compile Include="Core\Model\DraggedItem.cs" />
     <Compile Include="Core\Model\GlobalAppSettings.cs" />

@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Media;
 
 namespace appLauncher.Core.Model
 {
+
     public class Apps : ModelBase
     {
         public Apps() { }
@@ -27,6 +28,44 @@ namespace appLauncher.Core.Model
         private string _backColor;
         private string _textColor;
         private string _tip;
+        private bool _partFolder = false;
+        private string _folderName = string.Empty;
+        private int _listposition = 0;
+
+        public int ListPosition
+        {
+            get
+            {
+                return _listposition;
+            }
+            set
+            {
+                _listposition = value;
+            }
+        }
+        public bool PartFolder
+        {
+            get
+            {
+                return _partFolder;
+            }
+            set
+            {
+                _partFolder = value;
+            }
+        }
+        public string FolderName
+        {
+            get
+            {
+                return _folderName;
+            }
+            set
+            {
+                _folderName = value;
+            }
+        }
+
         public string Name
         {
             get
@@ -42,6 +81,7 @@ namespace appLauncher.Core.Model
                 SetProperty(ref _name, value);
             }
         }
+
         public string FullName
         {
             get
@@ -57,6 +97,7 @@ namespace appLauncher.Core.Model
                 _fullname = value;
             }
         }
+
         public string Description
         {
             get
@@ -72,6 +113,7 @@ namespace appLauncher.Core.Model
                 _description = value;
             }
         }
+
         public string Developer
         {
             get
@@ -87,6 +129,7 @@ namespace appLauncher.Core.Model
                 _developer = value;
             }
         }
+
         public DateTimeOffset InstalledDate
         {
             get
@@ -102,6 +145,19 @@ namespace appLauncher.Core.Model
                 _installedDate = value.ToUnixTimeSeconds();
             }
         }
+
+        public string Serializelogo
+        {
+            get
+            {
+                return Convert.ToBase64String(Logo);
+            }
+            set
+            {
+                Logo = Convert.FromBase64String(value);
+            }
+        }
+
         public byte[] Logo
         {
             get
@@ -117,6 +173,7 @@ namespace appLauncher.Core.Model
                 _logo = Convert.ToBase64String(value);
             }
         }
+
         public Color LogoColor
         {
             get
@@ -132,6 +189,7 @@ namespace appLauncher.Core.Model
                 SetProperty(ref _logoColor, value.ToString(), "LogoBrush");
             }
         }
+
         public Color BackColor
         {
             get
@@ -147,6 +205,7 @@ namespace appLauncher.Core.Model
                 SetProperty(ref _backColor, value.ToString(), "BackBrush");
             }
         }
+
         public Color TextColor
         {
             get
@@ -162,6 +221,7 @@ namespace appLauncher.Core.Model
                 SetProperty(ref _textColor, value.ToString(), "TextBrush");
             }
         }
+
         public string Tip
         {
             get

@@ -31,7 +31,7 @@ namespace appLauncher.Core.Pages
         private List<DisplayImages> displayImages = new List<DisplayImages>();
         readonly StorageFolder local = ApplicationData.Current.LocalFolder;
         private bool allapps = false;
-        private Apps selectedapp;
+        private AppTile selectedapp;
         private string sectionofapp;
         private string Appscolor;
         private string apptextcolor;
@@ -156,7 +156,7 @@ namespace appLauncher.Core.Pages
 
             if (Appslist.SelectedIndex > -1)
             {
-                selectedapp = (Apps)Appslist.SelectedItem;
+                selectedapp = (AppTile)Appslist.SelectedItem;
             }
         }
 
@@ -172,21 +172,21 @@ namespace appLauncher.Core.Pages
         {
             if (!allapps)
             {
-                int appselected = packageHelper.Apps.IndexOf(packageHelper.Apps.FirstOrDefault(x => x.FullName == selectedapp.FullName));
+                int appselected = packageHelper.Appors.IndexOf(packageHelper.Appors.Cast<AppTile>().FirstOrDefault(x => x.AppFullName == selectedapp.AppFullName));
                 if (appselected > -1)
                 {
-                    packageHelper.Apps[appselected] = selectedapp;
+                    packageHelper.Appors[appselected] = selectedapp;
                 }
 
             }
             else
             {
-                ObservableCollection<Apps> packs = packageHelper.Apps.GetOriginalCollection();
+                ObservableCollection<AppTile> packs = (ObservableCollection<AppTile>)packageHelper.Appors.GetOriginalCollection().Cast<AppTile>();
                 for (int i = 0; i < packageHelper.Apps.GetOriginalCollection().Count; i++)
                 {
-                    packageHelper.Apps[i].TextColor = selectedapp.TextColor;
-                    packageHelper.Apps[i].LogoColor = selectedapp.LogoColor;
-                    packageHelper.Apps[i].BackColor = selectedapp.BackColor;
+                    packageHelper.Appors[i]._textColor = selectedapp._textColor;
+                    packageHelper.Appors[i]._forgroundColor = selectedapp._forgroundColor;
+                    packageHelper.Appors[i]._backgroundColor = selectedapp._backgroundColor;
                 }
             }
 
@@ -259,17 +259,17 @@ namespace appLauncher.Core.Pages
 
         private void AppsLogoColor_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
         {
-            selectedapp.LogoColor = (args != null) ? args.NewColor : selectedapp.LogoColor;
+            selectedapp.AppForgroundColor = (args != null) ? args.NewColor : selectedapp.AppForgroundColor;
         }
 
         private void AppsBackgroundColor_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
         {
-            selectedapp.BackColor = (args != null) ? args.NewColor : selectedapp.BackColor;
+            selectedapp.AppBackgroundColor = (args != null) ? args.NewColor : selectedapp.AppBackgroundColor;
         }
 
         private void AppsTextColor_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
         {
-            selectedapp.TextColor = (args != null) ? args.NewColor : selectedapp.TextColor;
+            selectedapp.AppTextColor = (args != null) ? args.NewColor : selectedapp.AppTextColor;
         }
 
         private void TrackCrash_Toggled(object sender, RoutedEventArgs e)

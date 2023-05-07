@@ -1,8 +1,17 @@
 ﻿namespace appLauncher.Core.Model
 {
-    public abstract class ApporFolderBase
+    public class ApporFolderBase : ModelBase
     {
-        private string _name;
+        public string _name;
+        public string _forgroundColor;
+        public string _backgroundColor;
+        public string _textColor;
+        public int _listposition = 0;
+        public bool isfolder = false;
+
+
+
+
 
     }
 }

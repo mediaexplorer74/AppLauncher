@@ -1,4 +1,24 @@
-﻿namespace appLauncher.Core.Helpers
+﻿using appLauncher.Core.Brushes;
+using appLauncher.Core.Model;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.Storage;
+using Windows.Storage.Streams;
+using Windows.System.Threading;
+using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.Xaml.Media;
+
+namespace appLauncher.Core.Helpers
 {
     public static class ImageHelper
     {
@@ -57,7 +77,7 @@
                  });
 
             GC.Collect();
-
+            return; // RnD
         }
 
         public static void AddPageBackround(PageBackgrounds pageBackgrounds)
@@ -89,7 +109,9 @@
                     string apps = await Windows.Storage.FileIO.ReadTextAsync(item);
                     List<PageBackgrounds> images = JsonConvert.DeserializeObject<List<PageBackgrounds>>(apps);
                     backgroundImage = new ObservableCollection<PageBackgrounds>(images);
-                    ThreadPoolTimer imageTimer = ThreadPoolTimer.CreatePeriodicTimer(RecalculateThePageItems, SettingsHelper.totalAppSettings.ImageRotationTime);
+                    ThreadPoolTimer imageTimer = 
+                        ThreadPoolTimer.CreatePeriodicTimer(RecalculateThePageItems, 
+                        SettingsHelper.totalAppSettings.ImageRotationTime);
                 }
                 catch (Exception e)
                 {
@@ -117,6 +139,10 @@
 
         }
 
+        private static void RecalculateThePageItems(ThreadPoolTimer timer)
+        {
+            throw new NotImplementedException();
+        }
 
         public static async Task SaveImageOrder()
         {

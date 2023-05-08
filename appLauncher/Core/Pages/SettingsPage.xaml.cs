@@ -1,5 +1,20 @@
 ﻿// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
+using appLauncher.Core.Helpers;
+using appLauncher.Core.Model;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using Windows.Storage;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+
 namespace appLauncher.Core.Pages
 {
     /// <summary>
@@ -154,9 +169,10 @@ namespace appLauncher.Core.Pages
                 ObservableCollection<AppTile> packs = (ObservableCollection<AppTile>)packageHelper.Appors.GetOriginalCollection().Cast<AppTile>();
                 for (int i = 0; i < packageHelper.Apps.GetOriginalCollection().Count; i++)
                 {
-                    packageHelper.Apps[i].TextColor = selectedapp.TextColor;
-                    packageHelper.Apps[i].LogoColor = selectedapp.LogoColor;
-                    packageHelper.Apps[i].BackColor = selectedapp.BackColor;
+                    //RnD
+                    packageHelper.Apps[i].TextColor = default;//selectedapp.TextColor;
+                    packageHelper.Apps[i].LogoColor = default;//selectedapp.LogoColor;
+                    packageHelper.Apps[i].BackColor = default;//selectedapp.BackColor;
                 }
             }
 
@@ -216,7 +232,7 @@ namespace appLauncher.Core.Pages
                 Appslist.Visibility = Visibility.Collapsed;
                 Appslist.IsHitTestVisible = false;
                 Preview.IsHitTestVisible = true;
-                selectedapp = packageHelper.searchApps[0];
+                selectedapp = packageHelper.searchApps[0]; //RnD
                 TestApps.Visibility = Visibility.Visible;
                 TestApps.IsHitTestVisible = true;
                 allapps = true;
@@ -293,17 +309,15 @@ namespace appLauncher.Core.Pages
             }
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
-
         {
 
-
-
-
-
-
             selectedapp = packageHelper.Apps.GetOriginalCollection()[0];
+
             SettingsHelper.totalAppSettings.ShowApps = !AppSettings.IsOn;
-            Appslist.Visibility = (SettingsHelper.totalAppSettings.ShowApps == true) ? Visibility.Visible : Visibility.Collapsed;
+            Appslist.Visibility = (SettingsHelper.totalAppSettings.ShowApps == true) 
+                ? Visibility.Visible 
+                : Visibility.Collapsed;
+
             Appslist.IsHitTestVisible = SettingsHelper.totalAppSettings.ShowApps;
         }
 

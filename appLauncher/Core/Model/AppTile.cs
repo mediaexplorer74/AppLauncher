@@ -21,7 +21,9 @@ namespace appLauncher.Core.Model
         private string _appDeveloper;
         private long _appInstalledDate;
         private string _appTip;
-
+        internal object LogoColor;
+        internal object BackColor;
+        internal object TextColor;
 
         public int ListPosition
         {
@@ -196,6 +198,11 @@ namespace appLauncher.Core.Model
             {
                 return new SolidColorBrush(AppTextColor);
             }
+        }
+
+        public static implicit operator AppTile(Apps v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

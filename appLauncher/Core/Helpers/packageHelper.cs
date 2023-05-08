@@ -1,5 +1,21 @@
 ﻿// Methods for getting installed apps/games from the device are here. Note: Package = App/Game
 
+using appLauncher.Core.Model;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Core;
+using Windows.Foundation;
+using Windows.Management.Deployment;
+using Windows.Storage;
+using Windows.Storage.Streams;
+
 namespace appLauncher.Core.Helpers
 {
     public static class packageHelper
@@ -178,7 +194,8 @@ namespace appLauncher.Core.Helpers
 
 
             Apps = new AppPaginationObservableCollection(listAppss);
-            searchApps = new ReadOnlyObservableCollection<Apps>(new ObservableCollection<Apps>(listAppss.OrderByDescending(x => x.Name).ToList()));
+            searchApps = new ReadOnlyObservableCollection<Apps>(new ObservableCollection<Apps>
+                (listAppss.OrderByDescending(x => x.Name).ToList()));
             AppsRetreived(true, EventArgs.Empty);
         }
         public static async Task SaveCollectionAsync()

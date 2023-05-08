@@ -1,7 +1,11 @@
 ## appLauncher (appLauncher-dev codename)
+- Android-like Home Screens RnD for Windows 10 "family" (UWP)
+- Based on old-version of [appLauncher](https://github.com/IsaacMorris1980) by Isaac Morris
 
-Android-like Home Screens RnD for Windows 10 "family" (UWP)
-Based on old-version of [appLauncher](https://github.com/IsaacMorris1980) by Isaac Morris
+## Screenshot(s)
+![](images/shot1.png)
+![](images/shot2.png)
+
 
 ## My plan of research
 - Research "Add new folders" feature
@@ -13,7 +17,7 @@ Based on old-version of [appLauncher](https://github.com/IsaacMorris1980) by Isa
 - [Isaac Morris aka IsaacMorris1980's Github](https://github.com/IsaacMorris1980)
 
 ## ..
-As-is. Research only.
+As-is. Research only. DIY
 
 ## .
 -- me 2023
